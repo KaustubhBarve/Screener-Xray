@@ -1,0 +1,807 @@
+/* Screener X-Ray — report page styles.
+   Plain CSS, no framework, no remote fonts (CLAUDE.md rules 1 and 2).
+
+   Follows the visual grammar of institutional equity research: a masthead band,
+   a title block, a wide narrative column beside a narrow data rail, dense tables
+   ruled horizontally only, and a source line under every table and chart.
+
+   Palette sampled from the reference note (Jefferies), so the numerals carry the
+   same meaning they do there:
+     .figure  black  — reported by Screener
+     .derived blue   — calculated on this page
+     .absent  grey   — not reported. Never rendered as zero.
+
+   The print rules at the foot of this file are what window.print() turns into a
+   PDF: controls drop out, the thesis box prints as written, and no table, chart
+   or journal entry is allowed to break across a page. */
+
+:root {
+  --navy-deep: #0D1A36;   /* masthead */
+  --navy: #003366;        /* section heads, table headers */
+  --navy-mid: #0D4070;
+  --steel: #4782B5;       /* chart bars */
+  --blue: #548CD4;        /* derived numerals */
+  --cyan: #00B2E3;        /* accent rule */
+  --sky: #A8DBF0;         /* secondary series */
+  --sky-pale: #E8F5FA;    /* masthead right band */
+  --rust: #B34A3A;        /* lead section head */
+
+  --ink: #333333;
+  --ink-soft: #666666;
+  --muted: #7F807F;
+  --absent: #9AA0B0;
+
+  --rule: #BABDC2;
+  --rule-soft: #D9D9D9;
+  --paper: #FFFFFF;
+  --band: #F4F6F9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px 16px 28px;
+  background: #E9ECF1;
+  color: var(--ink);
+  font: 13px/1.5 "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sheet {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 20px 28px 22px;
+  background: var(--paper);
+  box-shadow: 0 1px 3px rgba(13, 26, 54, 0.14);
+}
+
+/* --- masthead -------------------------------------------------------- */
+
+.masthead {
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  border-left: 5px solid var(--cyan);
+  font-size: 25px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--navy-deep);
+  white-space: nowrap;
+}
+
+.brand span { font-weight: 700; margin-left: 6px; }
+
+.masthead-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 8px 14px;
+  background: var(--sky-pale);
+  text-align: right;
+}
+
+.kicker {
+  color: var(--steel);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.subject { color: var(--navy); font-size: 13px; font-weight: 600; }
+
+/* --- title block ----------------------------------------------------- */
+
+.titleblock { margin-bottom: 13px; }
+
+.titleblock h1 {
+  margin: 0 0 2px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--navy-deep);
+}
+
+.standfirst {
+  margin: 0 0 6px;
+  color: var(--navy-mid);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dateline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0;
+  padding-top: 7px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.dateline a { color: var(--blue); text-decoration: none; overflow-wrap: anywhere; }
+.dateline a:hover { text-decoration: underline; }
+
+/* --- breakage notice --------------------------------------------------- */
+
+.breakage {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border: 1px solid var(--rust);
+  border-left: 4px solid var(--rust);
+  background: #FDF6F4;
+}
+
+.breakage h2 {
+  margin: 0 0 5px;
+  padding: 0;
+  border: 0;
+  color: var(--rust);
+  font-size: 13px;
+}
+
+.breakage p { margin: 0 0 6px; font-size: 12px; }
+
+.breakage ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
+/* --- two-column grid -------------------------------------------------- */
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 318px;
+  gap: 24px;
+  align-items: start;
+}
+
+h2 {
+  margin: 15px 0 7px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+h2:first-child { margin-top: 0; }
+h2.accent { color: var(--rust); border-bottom-color: var(--rust); }
+
+/* --- narrative -------------------------------------------------------- */
+
+.narrative p {
+  margin: 0 0 6px;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.narrative strong { color: var(--navy-deep); }
+
+/* Numeral treatments. These carry meaning — see the key in the rail. */
+.figure { color: var(--ink); font-variant-numeric: tabular-nums; }
+.derived { color: var(--blue); font-variant-numeric: tabular-nums; }
+
+.absent {
+  color: var(--absent);
+  font-style: italic;
+  font-variant-numeric: normal;
+}
+
+/* --- tables ----------------------------------------------------------- */
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.figures thead th {
+  padding: 4px 8px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.figures thead th.rowlabel { text-align: left; }
+
+.figures td, .figures tbody th {
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--rule-soft);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.figures tbody th.rowlabel {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.figures tbody tr:nth-child(even) { background: var(--band); }
+
+.source-line {
+  margin: 5px 0 0;
+  color: var(--blue);
+  font-size: 10.5px;
+  font-style: italic;
+}
+
+/* --- rail ------------------------------------------------------------- */
+
+.col-rail { border-left: 1px solid var(--rule); padding-left: 22px; }
+
+.rail-block { margin-bottom: 12px; }
+
+.rail-head {
+  margin: 0 0 5px;
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid var(--navy);
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.kv th, .kv td {
+  padding: 3px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 11.5px;
+  vertical-align: top;
+}
+
+.kv th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--ink-soft);
+  padding-right: 10px;
+}
+
+.kv td { text-align: right; font-weight: 600; white-space: nowrap; }
+.kv td.absent { font-weight: 400; }
+
+/* --- charts ----------------------------------------------------------- */
+
+.chart { margin: 0 0 11px; }
+
+.chart-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 3px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--navy);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.chart svg { display: block; width: 100%; height: auto; }
+
+.chart-source {
+  margin: 2px 0 0;
+  color: var(--blue);
+  font-size: 10px;
+  font-style: italic;
+}
+
+.chart-empty { margin: 6px 0 0; font-size: 11.5px; }
+
+/* --- key -------------------------------------------------------------- */
+
+.key-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+.key-list li {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  line-height: 1.45;
+}
+
+.swatch { font-weight: 700; }
+
+/* --- announcements ---------------------------------------------------- */
+
+.announcements {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.announcements li {
+  display: flex;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.announcements .when {
+  flex: 0 0 48px;
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.announcements a { color: var(--navy-mid); text-decoration: none; }
+.announcements a:hover { text-decoration: underline; }
+
+/* --- footer ----------------------------------------------------------- */
+
+footer {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 2px solid var(--navy-deep);
+  color: var(--ink-soft);
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+footer p { margin: 0 0 5px; }
+
+.attribution {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule-soft);
+  color: var(--muted);
+}
+
+.attribution strong { color: var(--navy); }
+footer strong { color: var(--navy-deep); }
+footer .disclaimer strong { color: var(--rust); }
+
+/* --- narrow ----------------------------------------------------------- */
+
+@media (max-width: 860px) {
+  /* Twelve columns of financials cannot fit a phone, so the tables scroll. A
+     scroller with no cue is a scroller nobody finds — say so, in the line the
+     reader is already reading for the unit. */
+  .unit-note::after { content: " · scroll sideways"; }
+
+  body { padding: 0; }
+  .sheet { padding: 20px 16px 24px; }
+  .columns { grid-template-columns: 1fr; gap: 22px; }
+  .col-rail { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 18px; }
+  .masthead { flex-direction: column; gap: 10px; }
+  .masthead-meta { align-items: flex-start; text-align: left; }
+  .narrative p { text-align: left; hyphens: manual; }
+}
+
+/* --- about ------------------------------------------------------------ */
+
+.about-text, .keypoints {
+  margin: 0 0 5px;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.keypoints { color: var(--ink-soft); font-size: 12px; }
+
+/* --- journal (thesis) -------------------------------------------------- */
+
+.hint { margin: 0 0 7px; color: var(--muted); font-size: 11px; }
+
+textarea.thesis {
+  display: block;
+  width: 100%;
+  min-height: 96px;
+  padding: 10px 12px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--rust);
+  background: #FCFCFD;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.55;
+  resize: vertical;
+  overflow: hidden;                 /* grown to fit by script, so print never clips */
+}
+
+textarea.thesis:focus { outline: 2px solid var(--sky); outline-offset: -1px; }
+
+.journal-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.journal-status { flex: 1; color: var(--muted); font-size: 11px; }
+.journal-status.saved { color: var(--steel); }
+.journal-status.failed { color: var(--rust); font-weight: 600; }
+
+.btn {
+  padding: 5px 13px;
+  border: 1px solid var(--navy);
+  border-radius: 3px;
+  background: var(--navy);
+  color: #fff;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover { background: var(--navy-mid); }
+
+.btn-quiet { background: #fff; color: var(--navy); }
+.btn-quiet:hover { background: var(--sky-pale); }
+
+.entries { margin: 9px 0 0; padding: 0; list-style: none; }
+
+.entry {
+  padding: 7px 0 7px 11px;
+  border-left: 2px solid var(--rule);
+  margin-bottom: 7px;
+}
+
+.entry-date {
+  color: var(--steel);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.entry-text { white-space: pre-wrap; font-size: 12.5px; }
+
+.entries-empty { margin: 10px 0 0; font-size: 11.5px; }
+
+/* --- wide statement area ----------------------------------------------- */
+
+.wide { margin-top: 16px; }
+
+.statement { margin-bottom: 11px; }
+
+.statement-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 4px;
+  color: var(--navy-mid);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.unit-note {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.wide .figures { font-size: 11px; }
+.wide .figures td, .wide .figures tbody th, .wide .figures thead th { padding: 3px 6px; }
+
+.derived-table tbody th.rowlabel { color: var(--navy-mid); }
+
+.wide .hint { margin: 0 0 10px; font-size: 11px; line-height: 1.5; }
+
+/* --- filings ------------------------------------------------------------ */
+
+.filing-head {
+  margin: 8px 0 2px;
+  color: var(--ink-soft);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.filings { margin: 0; padding: 0; list-style: none; }
+
+.filings li {
+  padding: 3px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.filings a { color: var(--navy-mid); text-decoration: none; }
+.filings a:hover { text-decoration: underline; }
+.filings .note { display: block; color: var(--muted); font-size: 10px; }
+
+.announcements .note { color: var(--muted); font-size: 10.5px; }
+
+/* --- paired body charts ------------------------------------------------ */
+
+.chart-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+  margin-top: 10px;
+}
+
+@media (max-width: 620px) {
+  .chart-pair { grid-template-columns: 1fr; }
+}
+
+/* --- full-width strip (growth buckets + filings) ----------------------- */
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 12px 26px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+
+.strip .rail-block { margin-bottom: 4px; }
+
+@media (max-width: 860px) {
+  .strip { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- print ------------------------------------------------------------- */
+
+@media print {
+  @page { margin: 11mm; }
+
+  body {
+    padding: 0;
+    background: #fff;
+    font-size: 8.6pt;
+    line-height: 1.38;
+  }
+
+  .sheet { max-width: none; padding: 0; box-shadow: none; }
+
+  .no-print { display: none !important; }
+
+  /* Keep the navy header bands and the meaning-carrying numeral colours. */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* The thesis is the point of printing this, so it prints as written. */
+  textarea.thesis {
+    height: auto !important;
+    min-height: 0;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--rust);
+    background: #fff;
+    overflow: visible;
+    white-space: pre-wrap;
+  }
+
+  .columns { grid-template-columns: 1fr 270px; gap: 18px; }
+
+  /* Nothing may break across a page mid-figure. */
+  .statement, .chart, .rail-block, .entry, table, tr { break-inside: avoid; }
+  .breakage { break-inside: avoid; }
+  .strip, .chart-pair { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+
+  .wide .figures { font-size: 7.4pt; }
+  .table-wrap { overflow: visible; }
+
+  footer { break-inside: avoid; }
+}
+
+/* --- explainers -------------------------------------------------------- */
+
+/* Native <details>: no script, keyboard-accessible for free, and one a reader
+   opened before printing prints open. */
+.explainer {
+  margin: 4px 0 0;
+  padding-top: 3px;
+  border-top: 1px dotted var(--rule);
+}
+
+.explainer summary {
+  cursor: pointer;
+  color: var(--steel);
+  font-size: 10.5px;
+  font-weight: 600;
+  list-style: none;
+}
+
+.explainer summary::-webkit-details-marker { display: none; }
+.explainer summary::before { content: "+ "; font-weight: 700; }
+.explainer[open] summary::before { content: "\2212\00a0"; }
+.explainer summary:hover { color: var(--navy); }
+
+.explainer p {
+  margin: 5px 0 2px;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* --- loading ------------------------------------------------------------- */
+
+/* Shown only in the instant between the tab opening and report.js rendering.
+   render() clears #report, so this needs no script to remove it. */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40vh;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.ring {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--sky);
+  border-top-color: var(--steel);
+  border-radius: 50%;
+  animation: xray-spin 0.7s linear infinite;
+}
+
+@keyframes xray-spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ring { animation-duration: 2.4s; }
+}
+
+/* --- X-Ray findings ------------------------------------------------------ */
+
+.findings {
+  margin: 0 0 14px;
+  padding: 10px 16px 8px;
+  border-left: 4px solid var(--cyan);
+  background: var(--sky-pale);
+}
+
+.findings-head {
+  margin: 0 0 1px;
+  padding: 0;
+  border: 0;
+  color: var(--navy-deep);
+  font-size: 15px;
+}
+
+.findings-note { margin: 0 0 6px; color: var(--ink-soft); font-size: 11px; }
+
+.findings-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.finding {
+  padding: 6px 0;
+  border-top: 1px solid rgba(13, 26, 54, 0.1);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.finding-title { color: var(--navy-deep); }
+
+.finding-src {
+  display: block;
+  margin-top: 2px;
+  color: var(--steel);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 860px) {
+  .findings-list { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .findings { break-inside: avoid; }
+  .finding { break-inside: avoid; }
+}
+
+/* --- wide charts --------------------------------------------------------- */
+
+.chart-wide { margin-top: 10px; }
+
+/* --- statements in the Indian arrangement ------------------------------ */
+
+.format-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 10.5px;
+}
+
+.btn-small { padding: 2px 9px; font-size: 10.5px; font-weight: 500; }
+
+.statement-table tbody tr:nth-child(even) { background: transparent; }
+.statement-table tbody th.rowlabel { white-space: normal; min-width: 12em; }
+
+.statement-table .stmt-heading th {
+  padding-top: 7px;
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.statement-table .stmt-heading.memo th {
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.statement-table tr.level-1 th.rowlabel { padding-left: 18px; }
+.statement-table tr.total th,
+.statement-table tr.total td { font-weight: 700; border-top: 1px solid var(--rule); }
+
+.roman { display: inline-block; min-width: 2.4em; color: var(--muted); font-weight: 500; }
+.note-mark { margin-left: 2px; color: var(--muted); font-size: 8px; font-style: italic; }
+
+.stmt-notes {
+  margin: 4px 0 0;
+  padding-left: 16px;
+  color: var(--muted);
+  font-size: 10px;
+  list-style-type: lower-alpha;
+}
+
+@media print { .format-line .btn { display: none; } }
+
+.statement-table tr.level-2 th.rowlabel { padding-left: 32px; font-weight: 400; }
+
+/* --- Screener's Excel export, added by the reader ----------------------- */
+
+.export-drop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 0 0 9px;
+}
+
+.export-drop .hint { flex: 1 1 22em; margin: 0; }
+.export-drop label:focus-within { outline: 2px solid var(--blue); outline-offset: 1px; }
+.export-error { color: var(--rust); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media print { .export-drop { display: none; } }

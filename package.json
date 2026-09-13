@@ -1,0 +1,14 @@
+{
+  "name": "screener-xray",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Screener X-Ray - Manifest V3 Chrome extension for screener.in. The extension itself ships zero runtime dependencies; jsdom below is dev-only test tooling and is never bundled.",
+  "scripts": {
+    "test": "node --test",
+    "canary": "node tools/canary.js",
+    "package": "node tools/package.js"
+  },
+  "devDependencies": {
+    "jsdom": "^30.0.1"
+  }
+}

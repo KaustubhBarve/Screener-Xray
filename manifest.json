@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Screener X-Ray",
+  "version": "1.0.0",
+  "description": "A local, descriptive one-pager for screener.in company pages. No scores, no ratings, nothing leaves your device.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.screener.in/company/*",
+        "https://screener.in/company/*"
+      ],
+      "js": [
+        "parse.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "report.html"
+      ],
+      "matches": [
+        "https://www.screener.in/*",
+        "https://screener.in/*"
+      ]
+    }
+  ]
+}

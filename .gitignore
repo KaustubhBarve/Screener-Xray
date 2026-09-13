@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.zip
+
+# not for the public repository
+*.pdf
+launch/
+store/
+CLAUDE.md
+store-listing.md
+test/
+.github/
+icons/_*

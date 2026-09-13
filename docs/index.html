@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy — Screener X-Ray</title>
+<meta name="description" content="Screener X-Ray collects nothing, transmits nothing, and has no server. Privacy policy for the Chrome extension.">
+<style>
+  :root{
+    --navy-deep:#0D1A36; --navy:#003366; --navy-mid:#0D4070;
+    --steel:#4782B5; --cyan:#00B2E3; --sky-pale:#E8F5FA; --rust:#B34A3A;
+    --ink:#333; --ink-soft:#666; --muted:#7F807F;
+    --rule:#BABDC2; --rule-soft:#D9D9D9; --band:#F4F6F9;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; padding:28px 20px 64px; background:#E9ECF1; color:var(--ink);
+    font:15px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sheet{max-width:760px;margin:0 auto;padding:30px 40px 40px;background:#fff;
+         box-shadow:0 1px 3px rgba(13,26,54,.14)}
+  .masthead{display:flex;align-items:stretch;gap:18px;margin-bottom:24px}
+  .brand{display:flex;align-items:center;padding-left:12px;border-left:5px solid var(--cyan);
+         font-size:23px;font-weight:300;letter-spacing:-.02em;color:var(--navy-deep);white-space:nowrap}
+  .brand b{font-weight:700;margin-left:6px}
+  .masthead-meta{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-end;
+                 padding:8px 14px;background:var(--sky-pale);text-align:right}
+  .kicker{color:var(--steel);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+  h1{margin:0 0 4px;font-size:26px;font-weight:700;letter-spacing:-.015em;color:var(--navy-deep)}
+  .updated{margin:0 0 22px;padding-top:7px;border-top:1px solid var(--rule);
+           color:var(--muted);font-size:12px}
+  h2{margin:28px 0 10px;padding-bottom:4px;border-bottom:1px solid var(--rule);
+     color:var(--navy);font-size:15px;font-weight:700}
+  p,li{max-width:66ch}
+  .lede{font-size:16px;color:var(--navy-mid);font-weight:600}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0}
+  th,td{padding:6px 10px;border-bottom:1px solid var(--rule-soft);text-align:left;vertical-align:top}
+  thead th{background:var(--navy);color:#fff;font-size:12px;font-weight:600}
+  tbody tr:nth-child(even){background:var(--band)}
+  code{background:var(--band);padding:1px 5px;border-radius:3px;font-size:13px}
+  a{color:var(--steel)}
+  .note{border-left:3px solid var(--rust);background:#FDF6F4;padding:12px 16px;margin:18px 0}
+  .note p{margin:0}
+  footer{max-width:760px;margin:22px auto 0;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <div class="brand">Screener <b>X-Ray</b></div>
+    <div class="masthead-meta"><div class="kicker">Privacy policy</div></div>
+  </header>
+
+  <h1>Privacy policy</h1>
+  <p class="updated">Last updated: 13 September 2026</p>
+
+  <h2>The short version</h2>
+  <p class="lede">Screener X-Ray collects nothing, transmits nothing, and has no server.
+  Everything it does happens inside your own browser, on your own device.</p>
+  <p>There is no account, no sign-in, no analytics, no telemetry, no crash reporting,
+  no advertising, and no third-party code of any kind.</p>
+
+  <h2>What the extension does</h2>
+  <p>When you open a company page on <code>screener.in</code> and click the
+  <strong>X-Ray</strong> button, the extension reads the figures already displayed on
+  that page, rearranges them into a one-pager, and shows it in a new tab. It also lets
+  you type notes about the company and keeps them for the next time you visit.</p>
+  <p>If you choose to, you can also add Screener&rsquo;s own Excel export for a company &mdash; a
+  file you download from Screener yourself and pick from your computer. The report reads it
+  inside that tab to itemise expenses and assets. The file is never uploaded, and the
+  extension cannot fetch it on its own.</p>
+  <p>All of that happens locally. The figures never leave your browser.</p>
+
+  <h2>What is stored, and where</h2>
+  <p>The extension uses <code>chrome.storage.local</code>, which is browser storage on
+  your own computer. Three things are kept there:</p>
+  <table>
+    <thead><tr><th>What</th><th>Where</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>The most recent company report</td><td><code>xray:last</code></td><td>So the report tab can display it</td></tr>
+      <tr><td>Your notes, per company</td><td><code>xray:journal:&lt;ticker&gt;</code></td><td>So your thesis is there when you return</td></tr>
+      <tr><td>Screener&rsquo;s Excel export, only if you add one</td><td><code>xray:export:&lt;company id&gt;</code></td><td>So the itemised lines are there when you return</td></tr>
+    </tbody>
+  </table>
+  <p>Your notes include whatever you choose to type. Nothing analyses them, indexes them,
+  or reads them other than the extension displaying them back to you.</p>
+  <p>This data is <strong>not</strong> synced to a Google account, not backed up anywhere,
+  and not accessible to us — we have no way to see it, because there is nowhere for it to go.</p>
+
+  <h2>What is not collected</h2>
+  <p>To be explicit, the extension does not collect, store or transmit:</p>
+  <ul>
+    <li>personally identifiable information, names or email addresses</li>
+    <li>your Screener account details, credentials or cookies</li>
+    <li>your browsing history, or which companies you look at</li>
+    <li>location, device identifiers or IP addresses</li>
+    <li>usage analytics, click tracking, timing or performance data</li>
+  </ul>
+
+  <h2>Network activity</h2>
+  <p><strong>The extension makes no network requests.</strong> It does not contact any
+  server, including ours — we do not operate one. It loads no remote scripts, fonts,
+  stylesheets or images. Every file it runs is inside the extension package.</p>
+  <p>The only links in the report point to screener.in, BSE and company filings. Those are
+  ordinary links: nothing is fetched unless you click one, and clicking one is an ordinary
+  visit to that site, governed by that site's own privacy policy.</p>
+
+  <h2>Permissions</h2>
+  <p>The extension requests exactly one permission:</p>
+  <ul>
+    <li><strong><code>storage</code></strong> — to keep your notes, the last report and any export you add on
+    your device. This permission cannot read your browsing data; it is private storage
+    belonging to the extension.</li>
+  </ul>
+  <p>It runs its content script only on <code>https://screener.in/company/*</code>. It has
+  no access to any other website, and it requests no host permissions.</p>
+
+  <h2>Deleting your data</h2>
+  <p>Removing the extension from Chrome deletes everything it stored. You can also clear it
+  at any time without uninstalling, from <code>chrome://extensions</code> → Screener X-Ray →
+  <strong>Site settings</strong> → clear data.</p>
+  <p>There is nothing to request from us and nothing for us to delete, because we never
+  receive any of it.</p>
+
+  <h2>Children</h2>
+  <p>The extension is intended for adults researching listed companies. It is not directed
+  at children and collects no data from anyone.</p>
+
+  <h2>About the data shown</h2>
+  <p>Figures come from screener.in and are not independently verified. This extension is
+  <strong>not affiliated with, endorsed by, or connected to</strong> screener.in or its operators.</p>
+  <div class="note">
+    <p>The report is a descriptive statistical summary. It contains no scores, grades,
+    ratings, price targets or buy/sell/hold recommendations, and is
+    <strong>not investment advice</strong>. Verify against a company's own filings before
+    acting on anything.</p>
+  </div>
+
+  <h2>Changes</h2>
+  <p>If this policy ever changes, the date at the top changes with it, and the change will
+  appear in the extension's version history. A version that collected data would be a
+  different product, not an update to this one.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="mailto:kaustubhbarve2105@gmail.com">kaustubhbarve2105@gmail.com</a></p>
+
+</div>
+<footer>Screener X-Ray · privacy policy · this page is the published version of
+<code>privacy.md</code> in the project repository.</footer>
+</body>
+</html>

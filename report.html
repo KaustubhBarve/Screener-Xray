@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Screener X-Ray</title>
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+  <div class="sheet">
+    <header class="masthead">
+      <div class="brand">Screener <span>X-Ray</span></div>
+      <div class="masthead-meta">
+        <div class="kicker">Company data summary</div>
+        <div class="subject" id="masthead-subject"></div>
+      </div>
+    </header>
+
+    <article id="report" aria-live="polite" aria-busy="true">
+      <!-- rendered by report.js from chrome.storage.local; no inline script,
+           MV3's extension-page CSP forbids it. The placeholder below is what
+           shows in the moment before report.js replaces it. -->
+      <div class="loading" role="status">
+        <span class="ring" aria-hidden="true"></span>
+        <span>X-raying the page…</span>
+      </div>
+    </article>
+
+    <footer>
+      <p class="disclaimer">
+        <strong>Important.</strong> This is a descriptive statistical summary of
+        figures published on screener.in, read from the page you had open and
+        assembled entirely on your device. Nothing is transmitted anywhere.
+      </p>
+      <p>
+        It contains <strong>no scores, grades, ratings, price targets or
+        buy/sell/hold recommendations</strong>, and is <strong>not investment
+        advice</strong>. Figures are Screener’s and are not independently
+        verified. Anything Screener did not publish is shown as “not reported”,
+        never as zero. Verify against the company’s filings before acting on
+        anything here.
+      </p>
+      <p class="attribution">
+        Generated with <strong>Screener X-Ray</strong> — a local, descriptive
+        one-pager for screener.in. <span id="attribution-meta"></span>
+      </p>
+    </footer>
+  </div>
+
+  <script src="chart.js"></script>
+  <script src="insights.js"></script>
+  <script src="xlsx.js"></script>
+  <script src="statements.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>
