@@ -83,7 +83,7 @@ Screener X-Ray is not on the Chrome Web Store. You install it straight from this
 2. **Load it into Chrome**:
    - Open `chrome://extensions/` in Google Chrome.
    - Turn on **Developer mode** (toggle in the top-right corner).
-   - Click **Load unpacked** and select the folder that contains `manifest.json`.
+   - Click **Load unpacked** and select the folder inside the main folder that has been extracted from the zip.
 
 3. **Open a company report**:
    - Visit any consolidated company page on screener.in (e.g., `https://www.screener.in/company/ASIANPAINT/consolidated/`).
