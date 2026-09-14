@@ -74,24 +74,25 @@ Screener X-Ray adapts its presentation and charts based on the company's reporti
 
 ## Getting Started
 
-This extension is currently in pre-launch testing and is not yet available on the Chrome Web Store. To run it locally:
+Screener X-Ray is not on the Chrome Web Store. You install it straight from this repository — no Node.js, no command line, no coding tools needed.
 
-1. **Build the `dist/` bundle**:
-   ```bash
-   node tools/package.js
-   ```
-   This packages the production files into `dist/` and runs static security assertions (refusing the build if any network call or permission drift is detected).
+1. **Download it**:
+   - At the top of this page, click the green **Code** button → **Download ZIP**.
+   - Unzip the file. Windows' *Extract All* often creates a folder inside a folder (`Screener-Xray-main\Screener-Xray-main`) — the right one is the folder that contains `manifest.json`.
 
-2. **Load unpacked in Chrome**:
+2. **Load it into Chrome**:
    - Open `chrome://extensions/` in Google Chrome.
    - Turn on **Developer mode** (toggle in the top-right corner).
-   - Click **Load unpacked** and select the **`dist`** folder.
+   - Click **Load unpacked** and select the folder that contains `manifest.json`.
 
 3. **Open a company report**:
    - Visit any consolidated company page on screener.in (e.g., `https://www.screener.in/company/ASIANPAINT/consolidated/`).
    - Click the **X-Ray** button beside the company name to open the report.
 
-For the step-by-step testing walkthrough, see [INSTALL.md](INSTALL.md).
+> [!NOTE]
+> **Updates are manual.** When this repository changes, download the ZIP again, replace your folder, and click the reload arrow on the Screener X-Ray card in `chrome://extensions/`. Chrome may also show a notice about extensions running in developer mode — that is normal for anything installed outside the Chrome Web Store.
+
+**For developers:** `node tools/package.js` builds a trimmed `dist/` folder containing only the shipped files, and refuses to build if a network call or extra permission has crept in. Load `dist/` instead of the whole repository if you prefer. For the step-by-step testing walkthrough, see [INSTALL.md](INSTALL.md).
 
 ---
 
